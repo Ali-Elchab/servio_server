@@ -22,6 +22,8 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TernaryFilter;
 
 class ProviderResource extends Resource
 {
@@ -102,6 +104,17 @@ class ProviderResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->filters([
+                SelectFilter::make('subcategory_id')
+                    ->relationship('subcategory', 'name_en')
+                    ->label('Subcategory'),
+
+                TernaryFilter::make('is_active')
+                    ->label('Active Status')
+                    ->trueLabel('Active')
+                    ->falseLabel('Inactive')
+                    ->placeholder('All'),
+            ])
             ->columns([
                 ImageColumn::make('profile_image')
                     ->disk('public')
@@ -123,7 +136,10 @@ class ProviderResource extends Resource
                 IconColumn::make('is_active')
                     ->boolean()
                     ->label('Active'),
-
+                TextColumn::make('created_at')
+                    ->label('Created')
+                    ->dateTime('d M Y')
+                    ->sortable()
             ]);
     }
 

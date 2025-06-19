@@ -122,6 +122,16 @@ class SubcategoryResource extends Resource
                 TextColumn::make('priority')
                     ->sortable()
                     ->label('Priority'),
+                TextColumn::make('category.name_en')
+                    ->label('Category')
+                    ->sortable()
+                    ->searchable()
+                    ->badge()
+                    ->color('info'),
+                TextColumn::make('created_at')
+                    ->label('Created')
+                    ->date('d M Y')
+                    ->sortable()
 
             ])
             ->defaultSort('priority', 'asc')
