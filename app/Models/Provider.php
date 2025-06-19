@@ -29,9 +29,14 @@ class Provider extends Model
         'work_images' => 'array',
         'is_active' => 'boolean',
     ];
-    
+
     public function subcategory()
     {
         return $this->belongsTo(Subcategory::class);
+    }
+    
+    public function ratings()
+    {
+        return $this->hasMany(Rating::class);
     }
 }
