@@ -47,49 +47,46 @@ class ProviderResource extends Resource
                             ->relationship('subcategory', 'name_en')
                             ->required(),
 
-                        TextInput::make('phone')->tel()->nullable(),
-                        TextInput::make('whatsapp')->tel()->nullable(),
+                        TextInput::make('profile.phone')->tel()->nullable(),
+                        TextInput::make('profile.whatsapp')->tel()->nullable(),
 
-                        TextInput::make('location_en')->label('Location (EN)')->nullable(),
-                        TextInput::make('location_ar')->label('Location (AR)')->nullable(),
+                        TextInput::make('profile.location_en')->label('Location (EN)')->nullable(),
+                        TextInput::make('profile.location_ar')->label('Location (AR)')->nullable(),
 
-                        TextInput::make('latitude')->numeric()->nullable(),
-                        TextInput::make('longitude')->numeric()->nullable(),
+                        TextInput::make('profile.latitude')->numeric()->nullable(),
+                        TextInput::make('profile.longitude')->numeric()->nullable(),
                     ]),
                 ]),
 
             Section::make('Bio')
                 ->schema([
-                    Textarea::make('bio_en')->label('Bio (EN)')->rows(3)->nullable(),
-                    Textarea::make('bio_ar')->label('Bio (AR)')->rows(3)->nullable(),
+                    Textarea::make('profile.bio_en')->label('Bio (EN)')->rows(3)->nullable(),
+                    Textarea::make('profile.bio_ar')->label('Bio (AR)')->rows(3)->nullable(),
                 ]),
 
             Section::make('Media')
                 ->schema([
-                    FileUpload::make('profile_image')
+                    FileUpload::make('media.profile_image')
                         ->label('Profile Image')
                         ->image()
                         ->disk('public')
                         ->directory('provider_profiles')
-                        ->imagePreviewHeight(100)
-                        ->nullable(),
+                        ->imagePreviewHeight(100),
 
-                    FileUpload::make('work_images')
+                    FileUpload::make('media.work_images')
                         ->label('Work Images')
                         ->disk('public')
                         ->directory('provider_work')
                         ->multiple()
                         ->image()
                         ->imagePreviewHeight(100)
-                        ->reorderable()
-                        ->nullable(),
+                        ->reorderable(),
 
-                    FileUpload::make('portfolio_file')
+                    FileUpload::make('media.portfolio_file')
                         ->label('Portfolio File')
                         ->disk('public')
                         ->directory('provider_files')
-                        ->acceptedFileTypes(['application/pdf', 'application/zip', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'])
-                        ->nullable(),
+                        ->acceptedFileTypes(['application/pdf', 'application/zip']),
                 ]),
 
             Section::make('Visibility')
@@ -139,7 +136,23 @@ class ProviderResource extends Resource
                 TextColumn::make('created_at')
                     ->label('Created')
                     ->dateTime('d M Y')
+                    ->sortable(),
+                TextColumn::make('stat.views')
+                    ->label('Views')
+                    ->sortable(),
+
+                TextColumn::make('stat.bookings_count')
+                    ->label('Bookings')
+                    ->sortable(),
+
+                TextColumn::make('stat.reviews_count')
+                    ->label('Reviews')
+                    ->sortable(),
+
+                TextColumn::make('stat.average_rating')
+                    ->label('Rating')
                     ->sortable()
+                    ->formatStateUsing(fn($state) => number_format($state, 1)),
             ]);
     }
 
