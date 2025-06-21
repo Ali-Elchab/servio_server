@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ResponseMessages;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\ProviderResource;
 use App\Models\Provider;
+use App\Traits\ApiResponder;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class ProviderController extends Controller
 {
+    use ApiResponder;
+
     public function index(Request $request)
     {
         $query = Provider::query()->where('is_active', true);
@@ -61,9 +66,12 @@ class ProviderController extends Controller
 
         // Default sorting (newest first)
         $query->orderByDesc('created_at');
-
-        return ProviderResource::collection(
-            $query->with('subcategory')->paginate($perPage)
+        $providers = $query->with('subcategory')->paginate($perPage);
+        
+        return $this->success(
+            ProviderResource::collection($providers),
+            ResponseMessages::FETCH_SUCCESS,
+            Response::HTTP_OK
         );
     }
 
@@ -71,6 +79,10 @@ class ProviderController extends Controller
     public function show(Provider $provider)
     {
         abort_if(!$provider->is_active, 404);
-        return new ProviderResource($provider);
+        return $this->success(
+            new ProviderResource($provider),
+            ResponseMessages::FETCH_SUCCESS,
+            Response::HTTP_OK
+        );
     }
 }

@@ -2,15 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Helpers\ResponseMessages;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\RatingResource;
 use App\Models\Provider;
-use App\Models\Rating;
+use App\Traits\ApiResponder;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
 class RatingController extends Controller
 {
+    use ApiResponder;
+
     public function index(Provider $provider)
     {
         $ratings = $provider->ratings()
@@ -18,7 +22,11 @@ class RatingController extends Controller
             ->latest()
             ->paginate(10);
 
-        return RatingResource::collection($ratings);
+        return $this->success(
+            RatingResource::collection($ratings),
+            ResponseMessages::FETCH_SUCCESS,
+            Response::HTTP_OK
+        );
     }
 
     public function store(Request $request, Provider $provider)
@@ -29,25 +37,21 @@ class RatingController extends Controller
             'comment' => 'nullable|string|max:500',
         ]);
 
+
+
         if ($validator->fails()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Validation error.',
-                'errors'  => $validator->errors(),
-            ], 422);
+            return $this->error(ResponseMessages::VALIDATION_FAILURE, Response::HTTP_UNPROCESSABLE_ENTITY, $validator->errors());
         }
 
         $rating = $provider->ratings()->create([
             'name'     => $request->name,
             'rating'   => $request->rating,
             'comment'  => $request->comment,
-            'approved' => false, 
+            'approved' => false,
         ]);
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Rating submitted successfully and is pending approval.',
-            'data'    => new RatingResource($rating),
-        ]);
+        return $this->success([
+            new RatingResource($rating)
+        ], ResponseMessages::RATING_SUBMITTED, Response::HTTP_OK);
     }
 }
