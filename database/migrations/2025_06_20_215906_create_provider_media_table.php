@@ -20,6 +20,7 @@ return new class extends Migration
         $table->string('portfolio_file')->nullable();
 
         $table->timestamps();
+        $table->softDeletes();
     });
 }
 
