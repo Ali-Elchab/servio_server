@@ -64,4 +64,9 @@ class Provider extends Model
     {
         return $this->hasMany(Rating::class);
     }
+
+    public function payments()
+    {
+        return $this->hasMany(ProviderPayment::class);
+    }
 }
