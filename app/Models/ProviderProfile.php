@@ -8,12 +8,12 @@ class ProviderProfile extends Model
 {
     protected $fillable = [
         'provider_id',
-        'bio_en',
-        'bio_ar',
+        'bio',
         'phone',
         'whatsapp',
-        'location_en',
-        'location_ar',
+        'location',
+        'city_id',
+        'area_id',
         'latitude',
         'longitude',
     ];
@@ -21,5 +21,15 @@ class ProviderProfile extends Model
     public function provider()
     {
         return $this->belongsTo(Provider::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+    public function area()
+    {
+        return $this->belongsTo(Area::class);
     }
 }

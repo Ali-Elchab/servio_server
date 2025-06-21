@@ -3,6 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProviderResource\Pages;
+use App\Models\Area;
+use App\Models\City;
 use App\Models\Provider;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -40,8 +42,7 @@ class ProviderResource extends Resource
             Section::make('Provider Info')
                 ->schema([
                     Grid::make(2)->schema([
-                        TextInput::make('name_en')->label('Name (EN)')->required(),
-                        TextInput::make('name_ar')->label('Name (AR)')->required(),
+                        TextInput::make('name')->label('Name')->required(),
 
                         Select::make('subcategory_id')
                             ->label('Subcategory')
@@ -50,23 +51,45 @@ class ProviderResource extends Resource
 
                         TextInput::make('profile.phone')->tel()->nullable(),
                         TextInput::make('profile.whatsapp')->tel()->nullable(),
+                        Select::make('profile.city_id')
+                            ->label('City')
+                            ->reactive()
+                            ->options(
+                                City::orderBy(app()->getLocale() === 'ar' ? 'name_ar' : 'name_en')
+                                    ->pluck(app()->getLocale() === 'ar' ? 'name_ar' : 'name_en', 'id')
+                            )
+                            ->searchable()
+                            ->afterStateUpdated(fn($state, callable $set) => $set('area_id', null))
+                            ->required(),
 
-                        TextInput::make('profile.location_en')->label('Location (EN)')->nullable(),
-                        TextInput::make('profile.location_ar')->label('Location (AR)')->nullable(),
+                        Select::make('area_id')
+                            ->label('Area')
+                            ->relationship('profile.area', 'name_en')
+                            ->options(function (callable $get) {
+                                $cityId = $get('profile.city_id');
+                                if (!$cityId) return [];
+
+                                return Area::where('city_id', $cityId)
+                                    ->orderBy(app()->getLocale() === 'ar' ? 'name_ar' : 'name_en')
+                                    ->pluck(app()->getLocale() === 'ar' ? 'name_ar' : 'name_en', 'id');
+                            })
+                            ->reactive()
+                            ->preload()
+                            ->searchable()
+                            ->placeholder('Select Area')
+                            ->required()
+                            ->searchable(),
+                        TextInput::make('profile.location')->label('Location')->nullable(),
 
                         TextInput::make('profile.latitude')->numeric()->nullable(),
                         TextInput::make('profile.longitude')->numeric()->nullable(),
+
                     ]),
                 ]),
 
-            Section::make('Bio')
+            Section::make('Media & Bio')
                 ->schema([
-                    Textarea::make('profile.bio_en')->label('Bio (EN)')->rows(3)->nullable(),
-                    Textarea::make('profile.bio_ar')->label('Bio (AR)')->rows(3)->nullable(),
-                ]),
-
-            Section::make('Media')
-                ->schema([
+                    Textarea::make('profile.bio')->label('Bio')->rows(3)->nullable(),
                     FileUpload::make('media.profile_image')
                         ->label('Profile Image')
                         ->image()
@@ -92,9 +115,27 @@ class ProviderResource extends Resource
 
             Section::make('Visibility')
                 ->schema([
-                    Forms\Components\Toggle::make('is_active')
+                    Toggle::make('is_active')
                         ->label('Active')
-                        ->default(true),
+                        ->default(false),
+
+                    Toggle::make('is_featured')
+                        ->label('Featured')
+                        ->default(false),
+
+                    Select::make('approval_status')
+                        ->options([
+                            'pending' => 'Pending',
+                            'approved' => 'Approved',
+                            'rejected' => 'Rejected',
+                        ])
+                        ->default('pending')
+                        ->required(),
+
+                    Textarea::make('rejection_reason')
+                        ->label('Rejection Reason')
+                        ->visible(fn($get) => $get('approval_status') === 'rejected')
+                        ->nullable()
                 ])
         ]);
     }
@@ -134,6 +175,12 @@ class ProviderResource extends Resource
                 IconColumn::make('is_active')
                     ->boolean()
                     ->label('Active'),
+                IconColumn::make('approval_status')
+                    ->boolean()
+                    ->label('Approval Status'),
+                IconColumn::make('is_featured')
+                    ->boolean()
+                    ->label('Featured'),
                 TextColumn::make('created_at')
                     ->label('Created')
                     ->dateTime('d M Y')

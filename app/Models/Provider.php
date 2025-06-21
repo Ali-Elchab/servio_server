@@ -9,8 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Provider extends Model
 {
     protected $fillable = [
-        'name_en',
-        'name_ar',
+        'name',
         'subcategory_id',
         'user_id',
         'is_active',

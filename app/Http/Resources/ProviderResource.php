@@ -13,11 +13,11 @@ class ProviderResource extends JsonResource
 
         return [
             'id'              => $this->id,
-            'name'            => $locale === 'ar' ? $this->name_ar : $this->name_en,
-            'bio'             => $locale === 'ar' ? $this->bio_ar : $this->bio_en,
+            'name'            => $this->name,
+            'bio'             => $this->bio,
             'phone'           => $this->phone,
             'whatsapp'        => $this->whatsapp,
-            'location'        => $locale === 'ar' ? $this->location_ar : $this->location_en,
+            'location'        => $this->location,
             'latitude'        => $this->latitude,
             'longitude'       => $this->longitude,
 
@@ -31,6 +31,7 @@ class ProviderResource extends JsonResource
             'portfolio_file'  => $this->portfolio_file ? asset('storage/' . $this->portfolio_file) : null,
 
             'is_active'       => (bool) $this->is_active,
+            'approval_status' => $this->approval_status,
         ];
     }
 }
