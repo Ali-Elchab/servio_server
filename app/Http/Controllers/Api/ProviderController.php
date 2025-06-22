@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\ResponseMessages;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Provider\UpdateProviderRequest;
+use App\Http\Requests\StoreProviderRequest;
 use App\Http\Resources\ProviderResource;
 use App\Models\Provider;
 use App\Models\ProviderMedia;
@@ -84,7 +86,7 @@ class ProviderController extends Controller
         );
     }
 
-    public function store(Request $request)
+    public function store(StoreProviderRequest $request)
     {
         $data = $request->validated();
 
@@ -138,28 +140,10 @@ class ProviderController extends Controller
         return $this->success(new ProviderResource($provider), 'Provider created successfully.', Response::HTTP_CREATED);
     }
 
-    public function update(Request $request, Provider $provider)
+    public function update(UpdateProviderRequest  $request, Provider $provider)
     {
-        $data = $request->validate([
-            'subcategory_id' => 'sometimes|exists:subcategories,id',
-            'name'           => 'sometimes|string|max:255',
+        $data = $request->validated();
 
-            // Profile
-            'bio'       => 'nullable|string',
-            'phone'     => 'sometimes|string|max:20',
-            'whatsapp'  => 'nullable|string|max:20',
-            'city'      => 'sometimes|string|max:100',
-            'area'      => 'sometimes|string|max:100',
-            'location'  => 'nullable|string|max:255',
-            'latitude'  => 'nullable|numeric',
-            'longitude' => 'nullable|numeric',
-
-            // Media
-            'profile_image'  => 'nullable|image',
-            'work_images'    => 'nullable|array',
-            'work_images.*'  => 'image',
-            'portfolio_file' => 'nullable|file|mimes:pdf,doc,docx',
-        ]);
 
         // --- Update provider ---
         $provider->update(array_filter([
@@ -203,5 +187,61 @@ class ProviderController extends Controller
         $media->save();
 
         return $this->success(new ProviderResource($provider->refresh()), 'Provider updated successfully.');
+    }
+
+    public function myProfile(Request $request)
+    {
+        $user = $request->user();
+
+        $provider = $user->provider;
+
+        if (!$provider) {
+            return $this->error('You do not have a provider profile yet.', 404);
+        }
+
+        return $this->success(
+            new ProviderResource($provider),
+            'Provider profile fetched successfully.'
+        );
+    }
+
+    public function getStats(Request $request)
+    {
+        $user = $request->user();
+        $provider = $user->provider;
+
+        if (!$provider) {
+            return $this->error('Provider not found.', 404);
+        }
+
+        $stats = $provider->stats ?? null;
+
+        $reviews = $provider->ratings()
+            ->with('user:id,name')
+            ->latest()
+            ->get()
+            ->map(function ($rating) {
+                return [
+                    'id'         => $rating->id,
+                    'rating'     => $rating->rating,
+                    'comment'    => $rating->comment,
+                    'user'       => $rating->user,
+                    'created_at' => $rating->created_at->toDateTimeString(),
+                ];
+            });
+
+        return $this->success([
+            'stats'   => $stats,
+            'reviews' => $reviews,
+        ], 'Provider stats and reviews fetched.');
+    }
+
+    public function toggleStatus(Request $request, Provider $provider)
+    {
+        $provider->update([
+            'is_active' => !$provider->is_active,
+        ]);
+
+        return $this->success([], 'Provider status toggled.');
     }
 }

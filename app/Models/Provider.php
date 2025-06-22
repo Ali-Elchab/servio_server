@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Provider extends Model
 {
     use SoftDeletes;
-    
+
     protected $fillable = [
         'name',
         'subcategory_id',
@@ -32,6 +32,8 @@ class Provider extends Model
             $provider->media()->delete();
             $provider->profile()->delete();
             $provider->stat()->delete();
+            $provider->stats()?->delete();
+            $provider->payments()?->delete();
         });
     }
 

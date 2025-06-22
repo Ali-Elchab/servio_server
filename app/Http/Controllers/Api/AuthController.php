@@ -8,9 +8,10 @@ use App\Traits\ApiResponder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Response;
 use App\Helpers\ResponseMessages;
+use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Requests\Auth\RegisterRequest;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -18,19 +19,9 @@ class AuthController extends Controller
 {
     use ApiResponder;
 
-    public function register(Request $request)
+
+    public function register(RegisterRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name'     => 'required|string|max:255',
-            'email'    => 'required|email|unique:users,email',
-            'password' => 'required|string|min:6',
-            'role_id'  => 'required|exists:roles,id',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->error(ResponseMessages::VALIDATION_FAILURE, Response::HTTP_UNPROCESSABLE_ENTITY, $validator->errors());
-        }
-
         $user = User::create([
             'name'     => $request->name,
             'email'    => $request->email,
@@ -38,7 +29,7 @@ class AuthController extends Controller
             'role_id'  => $request->role_id,
         ]);
 
-        $token = $user->createToken($user->email)->plainTextToken;
+        $token = $user->createToken($request->email)->plainTextToken;
 
         return $this->success([
             'token' => $token,
@@ -46,17 +37,8 @@ class AuthController extends Controller
         ], ResponseMessages::REGISTERED, Response::HTTP_CREATED);
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'email'    => 'required|email',
-            'password' => 'required|string',
-        ]);
-
-        if ($validator->fails()) {
-            return $this->error(ResponseMessages::VALIDATION_FAILURE, Response::HTTP_UNPROCESSABLE_ENTITY, $validator->errors());
-        }
-
         if (!Auth::attempt($request->only('email', 'password'))) {
             return $this->error(ResponseMessages::UNAUTHORIZED, Response::HTTP_UNAUTHORIZED);
         }
@@ -75,6 +57,7 @@ class AuthController extends Controller
     }
 
 
+
     public function logout(Request $request)
     {
         $user = $request->user();
@@ -82,7 +65,6 @@ class AuthController extends Controller
         // $user->firebaseTokens()->delete();
         return $this->success([], ResponseMessages::LOGGED_OUT);
     }
-
 
     public function deleteAccount(Request $request)
     {
@@ -93,10 +75,11 @@ class AuthController extends Controller
         try {
             $user->tokens()->delete();
 
-            if ($user->provider) {
+            if ($user->role_id === 3 && $user->provider) {
                 $user->provider->delete();
             }
 
+            // Optional: delete Firebase tokens
             // $user->firebaseTokens()->delete();
 
             $user->delete();
