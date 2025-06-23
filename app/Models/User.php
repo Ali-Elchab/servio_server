@@ -12,7 +12,7 @@ use Laravel\Sanctum\HasApiTokens;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use SoftDeletes,HasFactory, Notifiable, HasApiTokens;
+    use SoftDeletes, HasFactory, Notifiable, HasApiTokens;
 
     /**
      * The attributes that are mass assignable.
@@ -52,5 +52,10 @@ class User extends Authenticatable
     public function role()
     {
         return $this->belongsTo(Role::class);
+    }
+
+    public function favorites()
+    {
+        return $this->belongsToMany(Provider::class, 'favorites')->withTimestamps();
     }
 }
