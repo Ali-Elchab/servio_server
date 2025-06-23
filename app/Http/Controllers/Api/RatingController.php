@@ -24,7 +24,7 @@ class RatingController extends Controller
 
         return $this->success(
             RatingResource::collection($ratings),
-            ResponseMessages::FETCH_SUCCESS,
+            ResponseMessages::FETCH_SUCCESS(),
             Response::HTTP_OK
         );
     }
@@ -40,7 +40,7 @@ class RatingController extends Controller
 
 
         if ($validator->fails()) {
-            return $this->error(ResponseMessages::VALIDATION_FAILURE, Response::HTTP_UNPROCESSABLE_ENTITY, $validator->errors());
+            return $this->error(ResponseMessages::VALIDATION_FAILURE(), Response::HTTP_UNPROCESSABLE_ENTITY, $validator->errors());
         }
 
         $rating = $provider->ratings()->create([
@@ -52,6 +52,6 @@ class RatingController extends Controller
 
         return $this->success([
             new RatingResource($rating)
-        ], ResponseMessages::RATING_SUBMITTED, Response::HTTP_OK);
+        ], ResponseMessages::RATING_SUBMITTED(), Response::HTTP_OK);
     }
 }

@@ -38,7 +38,7 @@ class SubcategoryController extends Controller
         }
         return $this->success(
             SubcategoryResource::collection($query->get()),
-            ResponseMessages::FETCH_SUCCESS,
+            ResponseMessages::FETCH_SUCCESS(),
             Response::HTTP_OK
         );
     }

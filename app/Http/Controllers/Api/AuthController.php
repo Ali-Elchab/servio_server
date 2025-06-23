@@ -34,13 +34,13 @@ class AuthController extends Controller
         return $this->success([
             'token' => $token,
             'user'  => $user,
-        ], ResponseMessages::REGISTERED, Response::HTTP_CREATED);
+        ], ResponseMessages::REGISTERED(), Response::HTTP_CREATED);
     }
 
     public function login(LoginRequest $request)
     {
         if (!Auth::attempt($request->only('email', 'password'))) {
-            return $this->error(ResponseMessages::UNAUTHORIZED, Response::HTTP_UNAUTHORIZED);
+            return $this->error(ResponseMessages::UNAUTHORIZED(), Response::HTTP_UNAUTHORIZED);
         }
 
         $user = Auth::user();
@@ -50,9 +50,9 @@ class AuthController extends Controller
             return $this->success([
                 'token' => $token,
                 'user'  => $user,
-            ], ResponseMessages::LOGGED_IN, Response::HTTP_OK);
+            ], ResponseMessages::LOGGED_IN(), Response::HTTP_OK);
         } else {
-            return $this->error(ResponseMessages::UNAUTHORIZED, Response::HTTP_UNAUTHORIZED);
+            return $this->error(ResponseMessages::UNAUTHORIZED(), Response::HTTP_UNAUTHORIZED);
         }
     }
 
@@ -63,7 +63,7 @@ class AuthController extends Controller
         $user = $request->user();
         $user->currentAccessToken()->delete();
         // $user->firebaseTokens()->delete();
-        return $this->success([], ResponseMessages::LOGGED_OUT);
+        return $this->success([], ResponseMessages::LOGGED_OUT());
     }
 
     public function deleteAccount(Request $request)
@@ -86,10 +86,10 @@ class AuthController extends Controller
 
             DB::commit();
 
-            return $this->success([], ResponseMessages::DELETED, Response::HTTP_OK);
+            return $this->success([], ResponseMessages::DELETED(), Response::HTTP_OK);
         } catch (Exception $e) {
             DB::rollBack();
-            return $this->error('Account deletion failed.', 500);
+            return $this->error(ResponseMessages::ACCOUNT_DELETION_FAILED(), 500);
         }
     }
 }

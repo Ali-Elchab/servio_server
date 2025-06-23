@@ -70,7 +70,7 @@ class ProviderController extends Controller
 
         return $this->success(
             ProviderResource::collection($providers),
-            ResponseMessages::FETCH_SUCCESS,
+            ResponseMessages::FETCH_SUCCESS(),
             Response::HTTP_OK
         );
     }
@@ -81,7 +81,7 @@ class ProviderController extends Controller
         abort_if(!$provider->is_active || $provider->approval_status !== 'approved', 404);
         return $this->success(
             new ProviderResource($provider),
-            ResponseMessages::FETCH_SUCCESS,
+            ResponseMessages::FETCH_SUCCESS(),
             Response::HTTP_OK
         );
     }
@@ -137,7 +137,7 @@ class ProviderController extends Controller
         // Create stats
         $provider->stats()->create();
 
-        return $this->success(new ProviderResource($provider), 'Provider created successfully.', Response::HTTP_CREATED);
+        return $this->success(new ProviderResource($provider), ResponseMessages::PROVIDER_CREATED(), Response::HTTP_CREATED);
     }
 
     public function update(UpdateProviderRequest  $request, Provider $provider)
@@ -186,7 +186,7 @@ class ProviderController extends Controller
 
         $media->save();
 
-        return $this->success(new ProviderResource($provider->refresh()), 'Provider updated successfully.');
+        return $this->success(new ProviderResource($provider->refresh()), ResponseMessages::PROVIDER_UPDATED());
     }
 
     public function myProfile(Request $request)
@@ -196,13 +196,10 @@ class ProviderController extends Controller
         $provider = $user->provider;
 
         if (!$provider) {
-            return $this->error('You do not have a provider profile yet.', 404);
+            return $this->error(ResponseMessages::PROVIDER_PROFILE_MISSING(), 404);
         }
 
-        return $this->success(
-            new ProviderResource($provider),
-            'Provider profile fetched successfully.'
-        );
+        return $this->success(new ProviderResource($provider), ResponseMessages::PROVIDER_PROFILE_FETCHED());
     }
 
     public function getStats(Request $request)
@@ -211,8 +208,9 @@ class ProviderController extends Controller
         $provider = $user->provider;
 
         if (!$provider) {
-            return $this->error('Provider not found.', 404);
+            return $this->error(ResponseMessages::PROVIDER_NOT_FOUND(), 404);
         }
+
 
         $stats = $provider->stats ?? null;
 
@@ -231,9 +229,9 @@ class ProviderController extends Controller
             });
 
         return $this->success([
-            'stats'   => $stats,
+            'stats' => $stats,
             'reviews' => $reviews,
-        ], 'Provider stats and reviews fetched.');
+        ], ResponseMessages::PROVIDER_STATS_FETCHED());
     }
 
     public function toggleStatus(Request $request, Provider $provider)
@@ -242,6 +240,6 @@ class ProviderController extends Controller
             'is_active' => !$provider->is_active,
         ]);
 
-        return $this->success([], 'Provider status toggled.');
+        return $this->success([], ResponseMessages::PROVIDER_STATUS_TOGGLED());
     }
 }

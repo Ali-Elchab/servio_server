@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Filament\Resources\CategoryResource as ResourcesCategoryResource;
 use App\Helpers\ResponseMessages;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
@@ -22,7 +21,7 @@ class CategoryController extends Controller
 
         return $this->success(
             CategoryResource::collection($categories),
-            ResponseMessages::FETCH_SUCCESS,
+            ResponseMessages::FETCH_SUCCESS(),
             Response::HTTP_OK
         );
     }

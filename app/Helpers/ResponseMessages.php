@@ -4,30 +4,40 @@ namespace App\Helpers;
 
 class ResponseMessages
 {
-    // 🔵 Core Actions
-    const FETCH_SUCCESS = 'Data fetched successfully.';
-    const CREATED = 'Successfully created!';
-    const UPDATED = 'Successfully updated!';
-    const DELETED = 'Successfully deleted!';
+    public static function FETCH_SUCCESS() { return __('messages.fetch_success'); }
+    public static function CREATED() { return __('messages.created'); }
+    public static function UPDATED() { return __('messages.updated'); }
+    public static function DELETED() { return __('messages.deleted'); }
 
-    // 🔴 Errors
-    const NOT_FOUND = 'Not found.';
-    const VALIDATION_FAILURE = 'Validation failed.';
-    const UNAUTHORIZED = 'You are not authorized to perform this action.';
-    const FORBIDDEN = 'Access denied.';
+    public static function NOT_FOUND() { return __('messages.not_found'); }
+    public static function VALIDATION_FAILURE(){ return __('messages.validation_failure'); }
+    public static function UNAUTHORIZED() { return __('messages.unauthorized'); }
+    public static function FORBIDDEN() { return __('messages.forbidden'); }
 
-    // 🟢 Authentication (for future login or provider panel)
-    const REGISTERED = 'Successfully registered!';
-    const LOGGED_IN = 'Successfully logged in!';
-    const LOGGED_OUT = 'Successfully logged out!';
-    const NO_ACTIVE_SUBSCRIPTION = 'No active subscription.';
+    public static function REGISTERED() { return __('messages.registered'); }
+    public static function LOGGED_IN()  { return __('messages.logged_in'); }
+    public static function LOGGED_OUT() { return __('messages.logged_out'); }
+    public static function NO_ACTIVE_SUBSCRIPTION() { return __('messages.no_active_subscription'); }
+    public static function ACCOUNT_DELETION_FAILED() { return __('messages.account_deletion_failed'); }
 
-    // 🟡 Ratings
-    const RATING_SUBMITTED = 'Your rating has been submitted!';
-    const RATING_APPROVED = 'Rating approved successfully.';
-    const RATING_REJECTED = 'Rating rejected.';
+    public static function RATING_SUBMITTED(){ return __('messages.rating_submitted'); }
+    public static function RATING_APPROVED() { return __('messages.rating_approved'); }
+    public static function RATING_REJECTED() { return __('messages.rating_rejected'); }
 
-    // 🟣 Bookings / Views / Stats (future expansion)
-    const BOOKING_SUCCESS = 'Booking completed!';
-    const STATS_UPDATED = 'Stats updated.';
+    public static function BOOKING_SUCCESS() { return __('messages.booking_success'); }
+    public static function STATS_UPDATED() { return __('messages.stats_updated'); }
+
+    public static function PROVIDER_CREATED() { return __('messages.provider_created'); }
+    public static function PROVIDER_UPDATED() { return __('messages.provider_updated'); }
+    public static function PROVIDER_NOT_FOUND() { return __('messages.provider_not_found'); }
+    public static function PROVIDER_PROFILE_MISSING() { return __('messages.provider_profile_missing'); }
+    public static function PROVIDER_PROFILE_FETCHED() { return __('messages.provider_profile_fetched'); }
+    public static function PROVIDER_STATS_FETCHED()   { return __('messages.provider_stats_fetched'); }
+    public static function PROVIDER_STATUS_TOGGLED()  { return __('messages.provider_status_toggled'); }
+    public static function PROVIDER_ADDED_TO_FAVORITES() { return __('messages.provider_added_to_favorites');}
+    public static function PROVIDER_REMOVED_FROM_FAVORITES() { return __('messages.provider_removed_from_favorites');}
+
+    public static function CITIES_FETCHED() { return __('messages.cities_fetched'); }
+    public static function AREAS_FETCHED() { return __('messages.areas_fetched'); }
+
 }
