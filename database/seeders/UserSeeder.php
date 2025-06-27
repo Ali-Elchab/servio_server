@@ -4,23 +4,35 @@ namespace Database\Seeders;
 
 use App\Models\Role;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        $adminRole = Role::where('name', 'admin')->first();
+        $faker = Factory::create('en_US');
 
+        $adminRole = Role::where('name', 'admin')->first();
+        $providerRole = Role::where('name', 'provider')->first();
+
+        // Create admin user
         User::create([
-            'name' => 'admin',
+            'name' => 'Admin',
             'email' => 'alielchab01@gmail.com',
-            'password' => bcrypt('password'), 
+            'password' => Hash::make('password'),
             'role_id' => $adminRole->id,
         ]);
+
+        // Create 15 provider users
+        for ($i = 1; $i <= 15; $i++) {
+            User::create([
+                'name' => $faker->name,
+                'email' => "provider{$i}@example.com",
+                'password' => Hash::make('password'),
+                'role_id' => $providerRole->id,
+            ]);
+        }
     }
 }
