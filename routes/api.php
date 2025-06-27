@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\FavoriteController;
 use App\Http\Controllers\Api\SubcategoryController;
 use App\Http\Controllers\Api\ProviderController;
 use App\Http\Controllers\Api\RatingController;
@@ -39,4 +40,9 @@ Route::middleware(['verify.api.key', 'set.locale'])->group(function () {
     // Location
     Route::get('/cities', [LocationController::class, 'cities']);
     Route::get('/cities/{city}/areas', [LocationController::class, 'areas']);
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::get('/favorites', [FavoriteController::class, 'index']);
+        Route::post('/favorites/{provider}', [FavoriteController::class, 'toggle']);
+    });
 });

@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\FavoritedByRelationResource\RelationManagers\FavoritedbyRelationManager;
 use App\Filament\Resources\ProviderResource\Pages;
 use App\Models\Area;
 use App\Models\City;
 use App\Models\Provider;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -20,10 +22,14 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Toggle;
+use Filament\Support\Enums\IconPosition;
+use Filament\Tables\Actions\BulkAction;
+use Filament\Tables\Actions\BulkActionGroup;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\BooleanColumn;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Filters\TernaryFilter;
 
@@ -31,7 +37,7 @@ class ProviderResource extends Resource
 {
     protected static ?string $model = Provider::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
     protected static ?string $navigationGroup = 'Providers';
     protected static ?int $navigationSort = 3;
 
@@ -42,7 +48,22 @@ class ProviderResource extends Resource
             Section::make('Provider Info')
                 ->schema([
                     Grid::make(2)->schema([
-                        TextInput::make('name')->label('Name')->required(),
+                        Select::make('user_id')
+                            ->label('User')
+                            ->options(function () {
+                                return User::where('role_id', 3)
+                                    ->whereDoesntHave('provider')
+                                    ->get(['id', 'name', 'email'])
+                                    ->mapWithKeys(fn($user) => [
+                                        $user->id => "{$user->name} ({$user->email})"
+                                    ]);
+                            })
+                            ->searchable()
+                            ->preload()
+                            ->required(),
+
+
+                        TextInput::make('business_name')->label('Business Name')->required(),
 
                         Select::make('subcategory_id')
                             ->label('Subcategory')
@@ -143,6 +164,7 @@ class ProviderResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+
             ->filters([
                 SelectFilter::make('subcategory_id')
                     ->relationship('subcategory', 'name_en')
@@ -154,15 +176,67 @@ class ProviderResource extends Resource
                     ->falseLabel('Inactive')
                     ->placeholder('All'),
             ])
+            ->bulkActions([
+                BulkActionGroup::make([
+                    BulkAction::make('approve')
+                        ->label('Approve Providers')
+                        ->icon('heroicon-o-check-circle')
+                        ->iconPosition(IconPosition::Before)
+                        ->requiresConfirmation()
+                        ->action(fn($records) => $records->each->update(['approval_status' => 'approved'])),
+
+                    BulkAction::make('reject')
+                        ->label('Reject Providers')
+                        ->icon('heroicon-o-x-circle')
+                        ->color('danger')
+                        ->requiresConfirmation()
+                        ->form([
+                            Forms\Components\Textarea::make('rejection_reason')
+                                ->label('Reason')
+                                ->required(),
+                        ])
+                        ->action(function ($records, array $data) {
+                            foreach ($records as $record) {
+                                $record->update([
+                                    'approval_status' => 'rejected',
+                                    'rejection_reason' => $data['rejection_reason'],
+                                ]);
+                            }
+                        }),
+
+                    BulkAction::make('activate')
+                        ->label('Activate')
+                        ->icon('heroicon-o-bolt')
+                        ->action(fn($records) => $records->each->update(['is_active' => true])),
+
+                    BulkAction::make('deactivate')
+                        ->label('Deactivate')
+                        ->icon('heroicon-o-stop')
+                        ->color('danger')
+                        ->action(fn($records) => $records->each->update(['is_active' => false])),
+                ]),
+            ])
             ->columns([
+                IconColumn::make('approval_status')
+                    ->boolean()
+                    ->label('Approval'),
+
+                  IconColumn::make('is_active')
+                    ->boolean()
+                    ->label('Status'),
+       
                 ImageColumn::make('profile_image')
                     ->disk('public')
                     ->circular()
                     ->size(40)
                     ->label('Avatar'),
 
-                TextColumn::make('name_en')
+                TextColumn::make('user.name')
                     ->label('Name')
+                    ->searchable()
+                    ->sortable(),
+                TextColumn::make('business_name')
+                    ->label('Business')
                     ->searchable()
                     ->sortable(),
 
@@ -172,15 +246,8 @@ class ProviderResource extends Resource
                     ->badge()
                     ->color('info'),
 
-                IconColumn::make('is_active')
-                    ->boolean()
-                    ->label('Active'),
-                IconColumn::make('approval_status')
-                    ->boolean()
-                    ->label('Approval Status'),
-                IconColumn::make('is_featured')
-                    ->boolean()
-                    ->label('Featured'),
+
+
                 TextColumn::make('created_at')
                     ->label('Created')
                     ->dateTime('d M Y')
@@ -201,13 +268,18 @@ class ProviderResource extends Resource
                     ->label('Rating')
                     ->sortable()
                     ->formatStateUsing(fn($state) => number_format($state, 1)),
+                IconColumn::make('is_featured')
+                    ->boolean()
+                    ->label('Featured'),
+
+
             ]);
     }
 
     public static function getRelations(): array
     {
         return [
-            //
+            FavoritedbyRelationManager::class,
         ];
     }
 

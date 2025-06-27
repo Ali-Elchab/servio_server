@@ -12,7 +12,7 @@ class Provider extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name',
+        'business_name',
         'subcategory_id',
         'user_id',
         'is_active',
@@ -23,11 +23,6 @@ class Provider extends Model
 
     protected static function booted()
     {
-        static::creating(function ($provider) {
-            $provider->media()->create([]);
-            $provider->profile()->create([]);
-            $provider->stat()->create([]);
-        });
         static::deleting(function ($provider) {
             $provider->media()->delete();
             $provider->profile()->delete();

@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('providers', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('business_name')->nullable();
 
             $table->foreignId('subcategory_id')->constrained()->onDelete('cascade');
-            $table->foreignId('user_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade');
 
             $table->boolean('is_active')->default(false);
             $table->boolean('is_featured')->default(false);

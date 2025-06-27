@@ -94,7 +94,7 @@ class ProviderController extends Controller
         $provider = Provider::create([
             'user_id'        => $data['user_id'],
             'subcategory_id' => $data['subcategory_id'],
-            'name'        => $data['name'],
+            'business_name'        => $data['business_name'],
             'is_active'      => false,
             'is_verified'    => false,
             'is_featured'    => false,
@@ -117,19 +117,27 @@ class ProviderController extends Controller
         $media->provider_id = $provider->id;
 
         if ($request->hasFile('profile_image')) {
-            $media->profile_image = $request->file('profile_image')->store('provider/profile_images', 'public');
+            $file = $request->file('profile_image');
+            $filename = uniqid('profile_') . '.' . $file->getClientOriginalExtension();
+            $media->profile_image = $file->storeAs('provider/profile_images', $filename, 'public');
         }
 
         if ($request->hasFile('work_images')) {
             $paths = [];
-            foreach ($request->file('work_images') as $img) {
-                $paths[] = $img->store('provider/work_images', 'public');
+            foreach ($request->file('work_images') as $index => $img) {
+                $filename = uniqid("work_{$index}_") . '.' . $img->getClientOriginalExtension();
+                $paths[] = $img->storeAs('provider/work_images', $filename, 'public');
             }
-            $media->work_images = json_encode($paths);
+
+            if (!empty($paths)) {
+                $media->work_images = json_encode($paths);
+            }
         }
 
         if ($request->hasFile('portfolio_file')) {
-            $media->portfolio_file = $request->file('portfolio_file')->store('provider/portfolio', 'public');
+            $file = $request->file('portfolio_file');
+            $filename = uniqid('portfolio_') . '.' . $file->getClientOriginalExtension();
+            $media->portfolio_file = $file->storeAs('provider/portfolio', $filename, 'public');
         }
 
         $media->save();
@@ -148,7 +156,7 @@ class ProviderController extends Controller
         // --- Update provider ---
         $provider->update(array_filter([
             'subcategory_id' => $data['subcategory_id'] ?? $provider->subcategory_id,
-            'name'           => $data['name'] ?? $provider->name,
+            'business_name'           => $data['business_name'] ?? $provider->name,
             'approval_status' => 'pending',
 
         ]));
