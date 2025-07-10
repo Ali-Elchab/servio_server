@@ -1,0 +1,905 @@
+name: Endpoints
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - GET
+    uri: api/categories
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      SERVIO_KEY: '123456'
+      Accept-Language: '{locale}'
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"status":"Success","message":"Data fetched successfully.","data":[{"id":1,"name":"Maintenance & Utilities","slug":"maintenance-utilities","image_url":"http:\/\/localhost\/storage\/category_images\/01JYBJ3A11TCC99D2ENDFSGZ9D.webp","priority":1,"is_active":true},{"id":2,"name":"Personal Care & Wellness","slug":"personal-care-wellness","image_url":"http:\/\/localhost\/storage\/category_images\/01JYBJ3XKMY4TQ6R0BA1DM6S5G.webp","priority":2,"is_active":true},{"id":3,"name":"Transport & Delivery","slug":"transport-delivery","image_url":"http:\/\/localhost\/storage\/category_images\/01JYBJ4BPXSV3MN10W14VB4MC6.webp","priority":3,"is_active":true},{"id":4,"name":"Tech Services","slug":"tech-services","image_url":"http:\/\/localhost\/storage\/category_images\/01JYBJ4Q7W2KNHM34V0YZ18XFM.webp","priority":4,"is_active":true}]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/subcategories
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      SERVIO_KEY: '123456'
+      Accept-Language: '{locale}'
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"status":"Success","message":"Data fetched successfully.","data":[{"id":1,"name":"Electricity","slug":"electricity","image_url":"http:\/\/localhost\/storage\/\/category_images\/electricity.png","priority":1,"is_active":true,"category":{"id":1,"name":"Maintenance & Utilities"}},{"id":11,"name":"Barbers","slug":"barbers","image_url":"http:\/\/localhost\/storage\/\/category_images\/barbers.png","priority":1,"is_active":true,"category":{"id":2,"name":"Personal Care & Wellness"}},{"id":15,"name":"Mobile Repair","slug":"mobile-repair","image_url":"http:\/\/localhost\/storage\/\/category_images\/mobile-repair.png","priority":1,"is_active":true,"category":{"id":4,"name":"Tech Services"}},{"id":20,"name":"Toktok Drivers","slug":"toktok-drivers","image_url":"http:\/\/localhost\/storage\/\/category_images\/toktok-drivers.png","priority":1,"is_active":true,"category":{"id":3,"name":"Transport & Delivery"}},{"id":2,"name":"Plumbing","slug":"plumbing","image_url":"http:\/\/localhost\/storage\/\/category_images\/plumbing.png","priority":2,"is_active":true,"category":{"id":1,"name":"Maintenance & Utilities"}},{"id":12,"name":"Hair & Makeup","slug":"hair-makeup","image_url":"http:\/\/localhost\/storage\/\/category_images\/hair-makeup.png","priority":2,"is_active":true,"category":{"id":2,"name":"Personal Care & Wellness"}},{"id":16,"name":"Laptop Repair","slug":"laptop-repair","image_url":"http:\/\/localhost\/storage\/\/category_images\/laptop-repair.png","priority":2,"is_active":true,"category":{"id":4,"name":"Tech Services"}},{"id":21,"name":"Movers","slug":"movers","image_url":"http:\/\/localhost\/storage\/\/category_images\/movers.png","priority":2,"is_active":true,"category":{"id":3,"name":"Transport & Delivery"}},{"id":3,"name":"Gas Delivery","slug":"gas-delivery","image_url":"http:\/\/localhost\/storage\/\/category_images\/gas-delivery.png","priority":3,"is_active":true,"category":{"id":1,"name":"Maintenance & Utilities"}},{"id":13,"name":"Nails & Skincare","slug":"nails-skincare","image_url":"http:\/\/localhost\/storage\/\/category_images\/nails-skincare.png","priority":3,"is_active":true,"category":{"id":2,"name":"Personal Care & Wellness"}},{"id":17,"name":"Internet Setup","slug":"internet-setup","image_url":"http:\/\/localhost\/storage\/\/category_images\/internet-setup.png","priority":3,"is_active":true,"category":{"id":4,"name":"Tech Services"}},{"id":22,"name":"Personal Drivers","slug":"personal-drivers","image_url":"http:\/\/localhost\/storage\/\/category_images\/personal-drivers.png","priority":3,"is_active":true,"category":{"id":3,"name":"Transport & Delivery"}},{"id":4,"name":"Cleaning","slug":"cleaning","image_url":"http:\/\/localhost\/storage\/\/category_images\/cleaning.png","priority":4,"is_active":true,"category":{"id":1,"name":"Maintenance & Utilities"}},{"id":14,"name":"Massage","slug":"massage","image_url":"http:\/\/localhost\/storage\/\/category_images\/massage.png","priority":4,"is_active":true,"category":{"id":2,"name":"Personal Care & Wellness"}},{"id":18,"name":"Software Installations","slug":"software-installations","image_url":"http:\/\/localhost\/storage\/\/category_images\/software-installations.png","priority":4,"is_active":true,"category":{"id":4,"name":"Tech Services"}},{"id":23,"name":"Grocery Delivery","slug":"grocery-delivery","image_url":"http:\/\/localhost\/storage\/\/category_images\/grocery-delivery.png","priority":4,"is_active":true,"category":{"id":3,"name":"Transport & Delivery"}},{"id":5,"name":"Carpentry","slug":"carpentry","image_url":"http:\/\/localhost\/storage\/\/category_images\/carpentry.png","priority":5,"is_active":true,"category":{"id":1,"name":"Maintenance & Utilities"}},{"id":19,"name":"Network & Systems","slug":"network-systems","image_url":"http:\/\/localhost\/storage\/\/category_images\/network-systems.png","priority":5,"is_active":true,"category":{"id":4,"name":"Tech Services"}},{"id":24,"name":"Courier","slug":"courier","image_url":"http:\/\/localhost\/storage\/\/category_images\/courier.png","priority":5,"is_active":true,"category":{"id":3,"name":"Transport & Delivery"}},{"id":6,"name":"AC Repair","slug":"ac-repair","image_url":"http:\/\/localhost\/storage\/\/category_images\/ac-repair.png","priority":6,"is_active":true,"category":{"id":1,"name":"Maintenance & Utilities"}},{"id":7,"name":"Painter","slug":"painter","image_url":"http:\/\/localhost\/storage\/\/category_images\/painter.png","priority":7,"is_active":true,"category":{"id":1,"name":"Maintenance & Utilities"}},{"id":8,"name":"Aluminum","slug":"aluminum","image_url":"http:\/\/localhost\/storage\/\/category_images\/aluminum.png","priority":8,"is_active":true,"category":{"id":1,"name":"Maintenance & Utilities"}},{"id":9,"name":"Tile Installation","slug":"tile-installation","image_url":"http:\/\/localhost\/storage\/\/category_images\/tile-installation.png","priority":9,"is_active":true,"category":{"id":1,"name":"Maintenance & Utilities"}},{"id":10,"name":"Curtain\/TV Installation","slug":"curtaintv-installation","image_url":"http:\/\/localhost\/storage\/\/category_images\/curtaintv-installation.png","priority":10,"is_active":true,"category":{"id":1,"name":"Maintenance & Utilities"}}]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/providers
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      SERVIO_KEY: '123456'
+      Accept-Language: '{locale}'
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"status":"Success","message":"Data fetched successfully.","data":[{"id":1,"name":null,"bio":null,"phone":null,"whatsapp":null,"location":null,"latitude":null,"longitude":null,"subcategory":{"id":1,"name":"Electricity"},"profile_image":null,"work_images":[],"portfolio_file":null,"is_active":true,"approval_status":"approved"},{"id":2,"name":null,"bio":null,"phone":null,"whatsapp":null,"location":null,"latitude":null,"longitude":null,"subcategory":{"id":2,"name":"Plumbing"},"profile_image":null,"work_images":[],"portfolio_file":null,"is_active":true,"approval_status":"approved"},{"id":3,"name":null,"bio":null,"phone":null,"whatsapp":null,"location":null,"latitude":null,"longitude":null,"subcategory":{"id":3,"name":"Gas Delivery"},"profile_image":null,"work_images":[],"portfolio_file":null,"is_active":true,"approval_status":"approved"},{"id":4,"name":null,"bio":null,"phone":null,"whatsapp":null,"location":null,"latitude":null,"longitude":null,"subcategory":{"id":4,"name":"Cleaning"},"profile_image":null,"work_images":[],"portfolio_file":null,"is_active":true,"approval_status":"approved"},{"id":5,"name":null,"bio":null,"phone":null,"whatsapp":null,"location":null,"latitude":null,"longitude":null,"subcategory":{"id":5,"name":"Carpentry"},"profile_image":null,"work_images":[],"portfolio_file":null,"is_active":true,"approval_status":"approved"},{"id":6,"name":null,"bio":null,"phone":null,"whatsapp":null,"location":null,"latitude":null,"longitude":null,"subcategory":{"id":6,"name":"AC Repair"},"profile_image":null,"work_images":[],"portfolio_file":null,"is_active":true,"approval_status":"approved"},{"id":7,"name":null,"bio":null,"phone":null,"whatsapp":null,"location":null,"latitude":null,"longitude":null,"subcategory":{"id":7,"name":"Painter"},"profile_image":null,"work_images":[],"portfolio_file":null,"is_active":true,"approval_status":"approved"},{"id":8,"name":null,"bio":null,"phone":null,"whatsapp":null,"location":null,"latitude":null,"longitude":null,"subcategory":{"id":8,"name":"Aluminum"},"profile_image":null,"work_images":[],"portfolio_file":null,"is_active":true,"approval_status":"approved"},{"id":9,"name":null,"bio":null,"phone":null,"whatsapp":null,"location":null,"latitude":null,"longitude":null,"subcategory":{"id":9,"name":"Tile Installation"},"profile_image":null,"work_images":[],"portfolio_file":null,"is_active":true,"approval_status":"approved"},{"id":10,"name":null,"bio":null,"phone":null,"whatsapp":null,"location":null,"latitude":null,"longitude":null,"subcategory":{"id":10,"name":"Curtain\/TV Installation"},"profile_image":null,"work_images":[],"portfolio_file":null,"is_active":true,"approval_status":"approved"}]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/providers/{provider_id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      SERVIO_KEY: '123456'
+      Accept-Language: '{locale}'
+    urlParameters:
+      provider_id:
+        name: provider_id
+        description: 'The ID of the provider.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      provider_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"status":"Success","message":"Data fetched successfully.","data":{"id":1,"name":null,"bio":null,"phone":null,"whatsapp":null,"location":null,"latitude":null,"longitude":null,"subcategory":{"id":1,"name":"Electricity"},"profile_image":null,"work_images":[],"portfolio_file":null,"is_active":true,"approval_status":"approved"}}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/providers/{provider_id}/ratings'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      SERVIO_KEY: '123456'
+      Accept-Language: '{locale}'
+    urlParameters:
+      provider_id:
+        name: provider_id
+        description: 'The ID of the provider.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      provider_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"status":"Success","message":"Data fetched successfully.","data":[]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/auth/register
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      SERVIO_KEY: '123456'
+      Accept-Language: '{locale}'
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      name:
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: true
+        example: vmqeopfuudtdsufvyvddq
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      email:
+        name: email
+        description: 'Must be a valid email address.'
+        required: true
+        example: kunde.eloisa@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      password:
+        name: password
+        description: 'Must be at least 6 characters.'
+        required: true
+        example: '4[*UyPJ"}6'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      role_id:
+        name: role_id
+        description: 'The <code>id</code> of an existing record in the roles table.'
+        required: true
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      name: vmqeopfuudtdsufvyvddq
+      email: kunde.eloisa@example.com
+      password: '4[*UyPJ"}6'
+      role_id: consequatur
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/auth/login
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      SERVIO_KEY: '123456'
+      Accept-Language: '{locale}'
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      email:
+        name: email
+        description: 'Must be a valid email address.'
+        required: true
+        example: qkunze@example.com
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      password:
+        name: password
+        description: ''
+        required: true
+        example: 'O[2UZ5ij-e/dl4m{o,'
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanBodyParameters:
+      email: qkunze@example.com
+      password: 'O[2UZ5ij-e/dl4m{o,'
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/auth/logout
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      SERVIO_KEY: '123456'
+      Accept-Language: '{locale}'
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - DELETE
+    uri: api/auth/delete
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      SERVIO_KEY: '123456'
+      Accept-Language: '{locale}'
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: api/providers
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      SERVIO_KEY: '123456'
+      Accept-Language: '{locale}'
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - PUT
+    uri: 'api/providers/{provider_id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: multipart/form-data
+      Accept: application/json
+      SERVIO_KEY: '123456'
+      Accept-Language: '{locale}'
+    urlParameters:
+      provider_id:
+        name: provider_id
+        description: 'The ID of the provider.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      provider_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      subcategory_id:
+        name: subcategory_id
+        description: 'The <code>id</code> of an existing record in the subcategories table.'
+        required: false
+        example: null
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      name:
+        name: name
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: vmqeopfuudtdsufvyvddq
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      bio:
+        name: bio
+        description: ''
+        required: false
+        example: consequatur
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      phone:
+        name: phone
+        description: 'Must not be greater than 20 characters.'
+        required: false
+        example: mqeopfuudtdsufvyv
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      whatsapp:
+        name: whatsapp
+        description: 'Must not be greater than 20 characters.'
+        required: false
+        example: ddqamniihfqcoynla
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      city:
+        name: city
+        description: 'Must not be greater than 100 characters.'
+        required: false
+        example: zghdtqtqxbajwbpilpmuf
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      area:
+        name: area
+        description: 'Must not be greater than 100 characters.'
+        required: false
+        example: inllwloauydlsmsjuryvo
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      location:
+        name: location
+        description: 'Must not be greater than 255 characters.'
+        required: false
+        example: jcybzvrbyickznkygloig
+        type: string
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      latitude:
+        name: latitude
+        description: ''
+        required: false
+        example: 11613.31890586
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      longitude:
+        name: longitude
+        description: ''
+        required: false
+        example: 11613.31890586
+        type: number
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      profile_image:
+        name: profile_image
+        description: 'Must be an image.'
+        required: false
+        example: null
+        type: file
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+      work_images:
+        name: work_images
+        description: 'Must be an image.'
+        required: false
+        example:
+          - null
+        type: 'file[]'
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+      portfolio_file:
+        name: portfolio_file
+        description: 'Must be a file.'
+        required: false
+        example: null
+        type: file
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: true
+        custom: []
+    cleanBodyParameters:
+      name: vmqeopfuudtdsufvyvddq
+      bio: consequatur
+      phone: mqeopfuudtdsufvyv
+      whatsapp: ddqamniihfqcoynla
+      city: zghdtqtqxbajwbpilpmuf
+      area: inllwloauydlsmsjuryvo
+      location: jcybzvrbyickznkygloig
+      latitude: 11613.31890586
+      longitude: 11613.31890586
+    fileParameters:
+      profile_image: null
+      work_images:
+        - null
+      portfolio_file: null
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/providers/me
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      SERVIO_KEY: '123456'
+      Accept-Language: '{locale}'
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 404
+        content: |-
+          {
+              "message": "No query results for model [App\\Models\\Provider] me"
+          }
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/providers/me/stats
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      SERVIO_KEY: '123456'
+      Accept-Language: '{locale}'
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/cities
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      SERVIO_KEY: '123456'
+      Accept-Language: '{locale}'
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"status":"Success","message":"Cities fetched successfully.","data":[{"id":3,"name_en":"Aley","name_ar":"\u0639\u0627\u0644\u064a\u0647"},{"id":2,"name_en":"Baabda","name_ar":"\u0628\u0639\u0628\u062f\u0627"},{"id":36,"name_en":"Baalbek","name_ar":"\u0628\u0639\u0644\u0628\u0643"},{"id":16,"name_en":"Batroun","name_ar":"\u0627\u0644\u0628\u062a\u0631\u0648\u0646"},{"id":14,"name_en":"Bcharre","name_ar":"\u0628\u0634\u0631\u064a"},{"id":20,"name_en":"Bebnine","name_ar":"\u0628\u0628\u0646\u064a\u0646"},{"id":1,"name_en":"Beirut","name_ar":"\u0628\u064a\u0631\u0648\u062a"},{"id":9,"name_en":"Beit Mery","name_ar":"\u0628\u064a\u062a \u0645\u0631\u064a"},{"id":39,"name_en":"Beqaa Gharbi","name_ar":"\u0627\u0644\u0628\u0642\u0627\u0639 \u0627\u0644\u063a\u0631\u0628\u064a"},{"id":10,"name_en":"Bikfaya","name_ar":"\u0628\u0643\u0641\u064a\u0627"},{"id":26,"name_en":"Bint Jbeil","name_ar":"\u0628\u0646\u062a \u062c\u0628\u064a\u0644"},{"id":8,"name_en":"Broummana","name_ar":"\u0628\u0631\u0645\u0627\u0646\u0627"},{"id":4,"name_en":"Choueifat","name_ar":"\u0627\u0644\u0634\u0648\u064a\u0641\u0627\u062a"},{"id":32,"name_en":"Chtaura","name_ar":"\u0634\u062a\u0648\u0631\u0627"},{"id":40,"name_en":"Dahieh","name_ar":"\u0627\u0644\u0636\u0627\u062d\u064a\u0629 \u0627\u0644\u062c\u0646\u0648\u0628\u064a\u0629"},{"id":17,"name_en":"Danniyeh (Syr Dinniyeh)","name_ar":"\u0627\u0644\u0636\u0646\u064a\u0629"},{"id":7,"name_en":"Dbayeh","name_ar":"\u0636\u0628\u064a\u0629"},{"id":19,"name_en":"Halba","name_ar":"\u062d\u0644\u0628\u0627"},{"id":28,"name_en":"Hasbaya","name_ar":"\u062d\u0627\u0635\u0628\u064a\u0627"},{"id":11,"name_en":"Hazmieh","name_ar":"\u0627\u0644\u062d\u0627\u0632\u0645\u064a\u0629"},{"id":37,"name_en":"Hermel","name_ar":"\u0627\u0644\u0647\u0631\u0645\u0644"},{"id":23,"name_en":"Jezzine","name_ar":"\u062c\u0632\u064a\u0646"},{"id":5,"name_en":"Jounieh","name_ar":"\u062c\u0648\u0646\u064a\u0629"},{"id":29,"name_en":"Kfar Kila","name_ar":"\u0643\u0641\u0631\u0643\u0644\u0627"},{"id":15,"name_en":"Koura (Amioun)","name_ar":"\u0627\u0644\u0643\u0648\u0631\u0629 \u2013 \u0623\u0645\u064a\u0648\u0646"},{"id":27,"name_en":"Marjayoun","name_ar":"\u0645\u0631\u062c\u0639\u064a\u0648\u0646"},{"id":35,"name_en":"Matn","name_ar":"\u0627\u0644\u0645\u062a\u0646"},{"id":18,"name_en":"Minieh","name_ar":"\u0627\u0644\u0645\u0646\u064a\u0629"},{"id":25,"name_en":"Nabatieh","name_ar":"\u0627\u0644\u0646\u0628\u0637\u064a\u0629"},{"id":38,"name_en":"Qaa","name_ar":"\u0627\u0644\u0642\u0627\u0639"},{"id":34,"name_en":"Qabb Elias","name_ar":"\u0642\u0628 \u0627\u0644\u064a\u0627\u0633"},{"id":31,"name_en":"Riyaq","name_ar":"\u0631\u064a\u0627\u0642"},{"id":24,"name_en":"Sarafand","name_ar":"\u0627\u0644\u0635\u0631\u0641\u0646\u062f"},{"id":21,"name_en":"Sidon (Saida)","name_ar":"\u0635\u064a\u062f\u0627"},{"id":33,"name_en":"Taanayel","name_ar":"\u062a\u0639\u0646\u0627\u064a\u0644"},{"id":12,"name_en":"Tripoli","name_ar":"\u0637\u0631\u0627\u0628\u0644\u0633"},{"id":22,"name_en":"Tyre (Sour)","name_ar":"\u0635\u0648\u0631"},{"id":30,"name_en":"Zahle","name_ar":"\u0632\u062d\u0644\u0629"},{"id":13,"name_en":"Zgharta","name_ar":"\u0632\u063a\u0631\u062a\u0627"},{"id":6,"name_en":"Zouk Mosbeh","name_ar":"\u0630\u0648\u0642 \u0645\u0635\u0628\u062d"}]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: 'api/cities/{city_id}/areas'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      SERVIO_KEY: '123456'
+      Accept-Language: '{locale}'
+    urlParameters:
+      city_id:
+        name: city_id
+        description: 'The ID of the city.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      city_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 200
+        content: '{"status":"Success","message":"Areas for this city fetched.","data":[{"id":17,"city_id":1,"name_en":"Achrafieh","name_ar":"\u0627\u0644\u0623\u0634\u0631\u0641\u064a\u0629"},{"id":11,"city_id":1,"name_en":"Ain El Mreisseh","name_ar":"\u0639\u064a\u0646 \u0627\u0644\u0645\u0631\u064a\u0633\u0629"},{"id":36,"city_id":1,"name_en":"Ain El Remmaneh","name_ar":"\u0639\u064a\u0646 \u0627\u0644\u0631\u0645\u0627\u0646\u0629"},{"id":61,"city_id":1,"name_en":"Airport Highway","name_ar":"\u0623\u0648\u062a\u0648\u0633\u062a\u0631\u0627\u062f \u0627\u0644\u0645\u0637\u0627\u0631"},{"id":31,"city_id":1,"name_en":"Baabda","name_ar":"\u0628\u0639\u0628\u062f\u0627"},{"id":37,"city_id":1,"name_en":"Badaro","name_ar":"\u0628\u062f\u0627\u0631\u0648"},{"id":58,"city_id":1,"name_en":"Barbir","name_ar":"\u0627\u0644\u0628\u0627\u0631\u0628\u064a\u0631"},{"id":6,"city_id":1,"name_en":"Basta","name_ar":"\u0627\u0644\u0628\u0633\u0637\u0629"},{"id":45,"city_id":1,"name_en":"Bechara El Khoury","name_ar":"\u0628\u0634\u0627\u0631\u0629 \u0627\u0644\u062e\u0648\u0631\u064a"},{"id":5,"city_id":1,"name_en":"Bir Abed","name_ar":"\u0628\u064a\u0631 \u0627\u0644\u0639\u0628\u062f"},{"id":42,"city_id":1,"name_en":"Bourj El Barajneh","name_ar":"\u0628\u0631\u062c \u0627\u0644\u0628\u0631\u0627\u062c\u0646\u0629"},{"id":41,"city_id":1,"name_en":"Bourj Hammoud","name_ar":"\u0628\u0631\u062c \u062d\u0645\u0648\u062f"},{"id":35,"city_id":1,"name_en":"Burj Abi Haidar","name_ar":"\u0628\u0631\u062c \u0623\u0628\u064a \u062d\u064a\u062f\u0631"},{"id":46,"city_id":1,"name_en":"Charles Helou","name_ar":"\u0634\u0627\u0631\u0644 \u0627\u0644\u062d\u0644\u0648"},{"id":28,"city_id":1,"name_en":"Chiyah","name_ar":"\u0627\u0644\u0634\u064a\u0627\u062d"},{"id":49,"city_id":1,"name_en":"Clemenceau","name_ar":"\u0643\u0644\u064a\u0645\u0646\u0635\u0648"},{"id":7,"city_id":1,"name_en":"Dahieh","name_ar":"\u0627\u0644\u0636\u0627\u062d\u064a\u0629"},{"id":30,"city_id":1,"name_en":"Dekwaneh","name_ar":"\u0627\u0644\u062f\u0643\u0648\u0627\u0646\u0629"},{"id":50,"city_id":1,"name_en":"Downtown Beirut","name_ar":"\u0648\u0633\u0637 \u0628\u064a\u0631\u0648\u062a"},{"id":57,"city_id":1,"name_en":"El Cola","name_ar":"\u0627\u0644\u0643\u0648\u0644\u0627"},{"id":54,"city_id":1,"name_en":"Fakhr El-Din Street","name_ar":"\u0634\u0627\u0631\u0639 \u0641\u062e\u0631 \u0627\u0644\u062f\u064a\u0646"},{"id":25,"city_id":1,"name_en":"Furn El Chebbak","name_ar":"\u0641\u0631\u0646 \u0627\u0644\u0634\u0628\u0627\u0643"},{"id":38,"city_id":1,"name_en":"Furn El Hayek","name_ar":"\u0641\u0631\u0646 \u0627\u0644\u062d\u0627\u064a\u0643"},{"id":16,"city_id":1,"name_en":"Gemmayzeh","name_ar":"\u0627\u0644\u062c\u0645\u064a\u0632\u0629"},{"id":2,"city_id":1,"name_en":"Hamra","name_ar":"\u0627\u0644\u062d\u0645\u0631\u0627"},{"id":4,"city_id":1,"name_en":"Haret Hreik","name_ar":"\u062d\u0627\u0631\u0629 \u062d\u0631\u064a\u0643"},{"id":29,"city_id":1,"name_en":"Hazmieh","name_ar":"\u0627\u0644\u062d\u0627\u0632\u0645\u064a\u0629"},{"id":63,"city_id":1,"name_en":"Hazmieh New","name_ar":"\u0627\u0644\u062d\u0627\u0632\u0645\u064a\u0629 \u0627\u0644\u062c\u062f\u064a\u062f\u0629"},{"id":55,"city_id":1,"name_en":"Horch Beirut","name_ar":"\u062d\u0631\u0634 \u0628\u064a\u0631\u0648\u062a"},{"id":39,"city_id":1,"name_en":"Horch Tabet","name_ar":"\u062d\u0631\u0634 \u062a\u0627\u0628\u062a"},{"id":47,"city_id":1,"name_en":"Jeitaoui","name_ar":"\u0627\u0644\u062c\u0639\u064a\u062a\u0627\u0648\u064a"},{"id":62,"city_id":1,"name_en":"Jisr El Basha","name_ar":"\u062c\u0633\u0631 \u0627\u0644\u0628\u0627\u0634\u0627"},{"id":26,"city_id":1,"name_en":"Jnah","name_ar":"\u0627\u0644\u062c\u0646\u0627\u062d"},{"id":34,"city_id":1,"name_en":"Karantina","name_ar":"\u0627\u0644\u0643\u0631\u0646\u062a\u064a\u0646\u0627"},{"id":23,"city_id":1,"name_en":"Kaskas","name_ar":"\u0643\u0631\u0643\u0627\u0633"},{"id":27,"city_id":1,"name_en":"Khalde","name_ar":"\u062e\u0644\u062f\u0629"},{"id":12,"city_id":1,"name_en":"Manara","name_ar":"\u0627\u0644\u0645\u0646\u0627\u0631\u0629"},{"id":22,"city_id":1,"name_en":"Mar Elias","name_ar":"\u0645\u0627\u0631 \u0625\u0644\u064a\u0627\u0633"},{"id":40,"city_id":1,"name_en":"Mar Mikhael","name_ar":"\u0645\u0627\u0631 \u0645\u062e\u0627\u064a\u0644"},{"id":19,"city_id":1,"name_en":"Mathaf","name_ar":"\u0627\u0644\u0645\u062a\u062d\u0641"},{"id":53,"city_id":1,"name_en":"Mathaf National Museum","name_ar":"\u0645\u062a\u062d\u0641 \u0628\u064a\u0631\u0648\u062a \u0627\u0644\u0648\u0637\u0646\u064a"},{"id":10,"city_id":1,"name_en":"Mazraa","name_ar":"\u0627\u0644\u0645\u0632\u0631\u0639\u0629"},{"id":48,"city_id":1,"name_en":"Monot","name_ar":"\u0645\u0648\u0646\u0648\u062a"},{"id":8,"city_id":1,"name_en":"Ouzai","name_ar":"\u0627\u0644\u0623\u0648\u0632\u0627\u0639\u064a"},{"id":20,"city_id":1,"name_en":"Qasqas","name_ar":"\u0642\u0635\u0642\u0635"},{"id":13,"city_id":1,"name_en":"Raouche","name_ar":"\u0627\u0644\u0631\u0648\u0634\u0629"},{"id":14,"city_id":1,"name_en":"Ras Beirut","name_ar":"\u0631\u0623\u0633 \u0628\u064a\u0631\u0648\u062a"},{"id":60,"city_id":1,"name_en":"Rihaniyeh","name_ar":"\u0627\u0644\u0631\u064a\u062d\u0627\u0646\u064a\u0629"},{"id":32,"city_id":1,"name_en":"Sabra","name_ar":"\u0635\u0628\u0631\u0627"},{"id":51,"city_id":1,"name_en":"Saifi Village","name_ar":"\u0642\u0631\u064a\u0629 \u0627\u0644\u0635\u064a\u0641\u064a"},{"id":44,"city_id":1,"name_en":"Salim Slam","name_ar":"\u0633\u0644\u064a\u0645 \u0633\u0644\u0627\u0645"},{"id":56,"city_id":1,"name_en":"Sassine Square","name_ar":"\u0633\u0627\u062d\u0629 \u0633\u0627\u0633\u064a\u0646"},{"id":64,"city_id":1,"name_en":"Sfeir","name_ar":"\u0635\u0641\u064a\u0631"},{"id":65,"city_id":1,"name_en":"Shiyah South","name_ar":"\u0627\u0644\u0634\u064a\u0627\u062d \u0627\u0644\u062c\u0646\u0648\u0628\u064a"},{"id":3,"city_id":1,"name_en":"Sin El Fil","name_ar":"\u0633\u0646 \u0627\u0644\u0641\u064a\u0644"},{"id":24,"city_id":1,"name_en":"Siyyad","name_ar":"\u0627\u0644\u0635\u064a\u0627\u062f"},{"id":15,"city_id":1,"name_en":"Sodeco","name_ar":"\u0633\u0648\u062f\u064a\u0643\u0648"},{"id":52,"city_id":1,"name_en":"Sodeco Square","name_ar":"\u0633\u0627\u062d\u0629 \u0627\u0644\u0633\u0648\u062f\u064a\u0643\u0648"},{"id":18,"city_id":1,"name_en":"Tabaris","name_ar":"\u062a\u0628\u0627\u0631\u064a\u0632"},{"id":43,"city_id":1,"name_en":"Talet El Khayat","name_ar":"\u062a\u0644\u0629 \u0627\u0644\u062e\u064a\u0627\u0637"},{"id":9,"city_id":1,"name_en":"Tariq El Jdideh","name_ar":"\u0637\u0631\u064a\u0642 \u0627\u0644\u062c\u062f\u064a\u062f\u0629"},{"id":33,"city_id":1,"name_en":"Tariq El Matar","name_ar":"\u0637\u0631\u064a\u0642 \u0627\u0644\u0645\u0637\u0627\u0631"},{"id":59,"city_id":1,"name_en":"Tayouneh","name_ar":"\u0627\u0644\u0637\u0651\u064a\u0648\u0646\u0629"},{"id":1,"city_id":1,"name_en":"Verdun","name_ar":"\u0641\u0631\u062f\u0627\u0646"},{"id":21,"city_id":1,"name_en":"Zokak El Blatt","name_ar":"\u0632\u0642\u0627\u0642 \u0627\u0644\u0628\u0644\u0627\u0637"}]}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - GET
+    uri: api/favorites
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      SERVIO_KEY: '123456'
+      Accept-Language: '{locale}'
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses:
+      -
+        status: 401
+        content: '{"message":"Unauthenticated."}'
+        headers:
+          cache-control: 'no-cache, private'
+          content-type: application/json
+          access-control-allow-origin: '*'
+        description: null
+        custom: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []
+  -
+    httpMethods:
+      - POST
+    uri: 'api/favorites/{provider_id}'
+    metadata:
+      groupName: Endpoints
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: ''
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+      SERVIO_KEY: '123456'
+      Accept-Language: '{locale}'
+    urlParameters:
+      provider_id:
+        name: provider_id
+        description: 'The ID of the provider.'
+        required: true
+        example: 1
+        type: integer
+        enumValues: []
+        exampleWasSpecified: false
+        nullable: false
+        custom: []
+    cleanUrlParameters:
+      provider_id: 1
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters: []
+    cleanBodyParameters: []
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

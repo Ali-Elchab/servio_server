@@ -66,7 +66,8 @@ class ProviderController extends Controller
 
         // Default sorting (newest first)
         $query->orderByDesc('created_at');
-        $providers = $query->with('subcategory')->paginate($perPage);
+        
+        $providers =  $query->with(['subcategory', 'profile', 'media', 'user'])->paginate($perPage);
 
         return $this->success(
             ProviderResource::collection($providers),

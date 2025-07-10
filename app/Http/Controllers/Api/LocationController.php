@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Http\Controllers\Api;
+
 use App\Helpers\ResponseMessages;
 use App\Http\Controllers\Controller;
 use App\Models\City;

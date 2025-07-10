@@ -7,6 +7,7 @@ use App\Http\Controllers\Api\FavoriteController;
 use App\Http\Controllers\Api\SubcategoryController;
 use App\Http\Controllers\Api\ProviderController;
 use App\Http\Controllers\Api\RatingController;
+use App\Http\Controllers\Api\LocationController;
 
 Route::middleware(['verify.api.key', 'set.locale'])->group(function () {
 
