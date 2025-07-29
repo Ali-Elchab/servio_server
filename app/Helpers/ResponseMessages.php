@@ -17,6 +17,8 @@ class ResponseMessages
     public static function REGISTERED() { return __('messages.registered'); }
     public static function LOGGED_IN()  { return __('messages.logged_in'); }
     public static function LOGGED_OUT() { return __('messages.logged_out'); }
+    public static function USER_NOT_FOUND() { return __('messages.user_not_found'); }
+    public static function INVALID_CREDENTIALS() { return __('messages.invalid_credentials'); }
     public static function NO_ACTIVE_SUBSCRIPTION() { return __('messages.no_active_subscription'); }
     public static function ACCOUNT_DELETION_FAILED() { return __('messages.account_deletion_failed'); }
 

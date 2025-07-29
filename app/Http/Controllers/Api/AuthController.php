@@ -12,8 +12,10 @@ use Illuminate\Http\Response;
 use App\Helpers\ResponseMessages;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Resources\UserResource;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 
 class AuthController extends Controller
 {
@@ -39,17 +41,27 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request)
     {
-        if (!Auth::attempt($request->only('email', 'password'))) {
-            return $this->error(ResponseMessages::UNAUTHORIZED(), Response::HTTP_UNAUTHORIZED);
-        }
+        $credentials = $request->validated();
 
-        $user = Auth::user();
+        $user = User::query()->firstWhere([
+            'email'         => $credentials['email'],
+        ]);
+        if (!$user)
+            throw ValidationException::withMessages([
+                'email' => [ResponseMessages::USER_NOT_FOUND()]
+            ]);
+
+        if (!Auth::attempt($credentials))
+            throw ValidationException::withMessages([
+                'email' => [ResponseMessages::INVALID_CREDENTIALS()]
+            ]);
+
         if ($user instanceof User) {
             $token =  $user->createToken($user->email)->plainTextToken;
 
             return $this->success([
                 'token' => $token,
-                'user'  => $user,
+                'user'  => new UserResource($user),
             ], ResponseMessages::LOGGED_IN(), Response::HTTP_OK);
         } else {
             return $this->error(ResponseMessages::UNAUTHORIZED(), Response::HTTP_UNAUTHORIZED);

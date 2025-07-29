@@ -90,10 +90,11 @@ class ProviderController extends Controller
     public function store(StoreProviderRequest $request)
     {
         $data = $request->validated();
+        $user_id = $request->user()->id;
 
         // Save provider
         $provider = Provider::create([
-            'user_id'        => $data['user_id'],
+            'user_id'        => $user_id,
             'subcategory_id' => $data['subcategory_id'],
             'business_name'        => $data['business_name'],
             'is_active'      => false,

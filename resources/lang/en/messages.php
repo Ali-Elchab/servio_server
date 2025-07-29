@@ -28,6 +28,8 @@ return [
     'registered' => 'Successfully registered!',
     'logged_in' => 'Successfully logged in!',
     'logged_out' => 'Successfully logged out!',
+    'user_not_found'       => 'No account found with this email.',
+    'invalid_credentials'  => 'Incorrect username or password.',
     'no_active_subscription' => 'No active subscription.',
     'account_deletion_failed' => 'Account deletion failed.',
 
