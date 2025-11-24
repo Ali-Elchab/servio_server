@@ -65,9 +65,13 @@ class ProviderResource extends Resource
 
                         TextInput::make('business_name')->label('Business Name')->required(),
 
-                        Select::make('subcategory_id')
-                            ->label('Subcategory')
-                            ->relationship('subcategory', 'name_en')
+                        Select::make('category_id')
+                            ->label('Category')
+                            ->relationship('category', 'name_en', function ($query) {
+                                $query->whereNotNull('parent_id');
+                            })
+                            ->searchable()
+                            ->preload()
                             ->required(),
 
                         TextInput::make('profile.phone')->tel()->nullable(),
@@ -166,9 +170,9 @@ class ProviderResource extends Resource
         return $table
 
             ->filters([
-                SelectFilter::make('subcategory_id')
-                    ->relationship('subcategory', 'name_en')
-                    ->label('Subcategory'),
+                SelectFilter::make('category_id')
+                    ->relationship('category', 'name_en', fn($q) => $q->whereNotNull('parent_id'))
+                    ->label('Category'),
 
                 TernaryFilter::make('is_active')
                     ->label('Active Status')
@@ -240,8 +244,8 @@ class ProviderResource extends Resource
                     ->searchable()
                     ->sortable(),
 
-                TextColumn::make('subcategory.name_en')
-                    ->label('Subcategory')
+                TextColumn::make('category.name_en')
+                    ->label('Category')
                     ->sortable()
                     ->badge()
                     ->color('info'),

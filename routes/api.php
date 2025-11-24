@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\FavoriteController;
-use App\Http\Controllers\Api\SubcategoryController;
 use App\Http\Controllers\Api\ProviderController;
 use App\Http\Controllers\Api\RatingController;
 use App\Http\Controllers\Api\LocationController;
@@ -13,7 +12,9 @@ Route::middleware(['verify.api.key', 'set.locale'])->group(function () {
 
     // Public (no auth)
     Route::get('/categories', [CategoryController::class, 'index']);
-    Route::get('/subcategories', [SubcategoryController::class, 'index']);
+    Route::get('/categories/{category}', [CategoryController::class, 'show']);
+    Route::get('/categories/{category}/children', [CategoryController::class, 'children']);
+    Route::get('/subcategories', [CategoryController::class, 'children']); // backward compatible alias
     Route::get('/providers', [ProviderController::class, 'index']);
     Route::get('/providers/{provider}', [ProviderController::class, 'show']);
     Route::get('/providers/{provider}/ratings', [RatingController::class, 'index']);

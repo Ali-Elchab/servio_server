@@ -7,7 +7,7 @@ use App\Models\Provider;
 use App\Models\ProviderMedia;
 use App\Models\ProviderProfile;
 use App\Models\ProviderStat;
-use App\Models\Subcategory;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -17,11 +17,11 @@ class ProviderSeeder extends Seeder
     {
         $faker = \Faker\Factory::create('en_US');
 
-        $subcategories = Subcategory::all();
+        $categories = Category::whereNotNull('parent_id')->get();
         $users = User::where('role_id', 3)->take(15)->get();
 
-        if ($subcategories->isEmpty()) {
-            $this->command->error('No subcategories found. Seed them first.');
+        if ($categories->isEmpty()) {
+            $this->command->error('No child categories found. Seed categories first.');
             return;
         }
 
@@ -31,11 +31,11 @@ class ProviderSeeder extends Seeder
         }
 
         foreach ($users as $index => $user) {
-            $subcategory = $subcategories->get($index) ?? $subcategories->random();
+            $category = $categories->get($index) ?? $categories->random();
 
             $provider = Provider::create([
                 'user_id' => $user->id,
-                'subcategory_id' => $subcategory->id,
+                'category_id' => $category->id,
                 'business_name' => $faker->company,
                 'is_active' => true,
                 'is_verified' => $faker->boolean(50),

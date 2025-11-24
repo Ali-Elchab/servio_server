@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Provider;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -18,8 +18,8 @@ class StoreProviderRequest extends FormRequest
     {
         return [
             'user_id'        => 'required|exists:users,id',
-            'subcategory_id' => 'required|exists:subcategories,id',
-            'name'        => 'required|string|max:255',
+            'category_id'    => 'required|exists:categories,id',
+            'business_name'  => 'required|string|max:255',
             'bio'         => 'nullable|string',
             'phone'          => 'required|string|max:20',
             'whatsapp'       => 'nullable|string|max:20',
@@ -42,8 +42,8 @@ class StoreProviderRequest extends FormRequest
     {
         return [
             'user_id.required'        => 'The user ID is required.',
-            'subcategory_id.required' => 'The subcategory ID is required.',
-            'name.required'        => 'Name is required.',
+            'category_id.required'    => 'The category ID is required.',
+            'business_name.required'  => 'Business name is required.',
             'phone.required'          => 'The phone number is required.',
             'city.required'           => 'The city is required.',
             'area.required'           => 'The area is required.',

@@ -11,7 +11,7 @@ class UpdateProviderRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,8 +22,8 @@ class UpdateProviderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'subcategory_id' => 'sometimes|exists:subcategories,id',
-            'name'           => 'sometimes|string|max:255',
+            'category_id'   => 'sometimes|exists:categories,id',
+            'business_name' => 'sometimes|string|max:255',
 
             // Profile
             'bio'       => 'nullable|string',

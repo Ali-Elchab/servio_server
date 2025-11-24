@@ -5,7 +5,6 @@ namespace App\Filament\Resources\ProviderResource\Widgets;
 use App\Models\Category;
 use App\Models\Provider;
 use App\Models\ProviderStat;
-use App\Models\Subcategory;
 use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Stat;
@@ -17,6 +16,8 @@ class ProviderStats extends BaseWidget
         $pendingCount = Provider::where('approval_status', 'pending')->count();
         $reviewCount = ProviderStat::sum('reviews_count');
         $avgRating = number_format(ProviderStat::avg('average_rating'), 1);
+        $rootCategoryCount = Category::whereNull('parent_id')->count();
+        $childCategoryCount = Category::whereNotNull('parent_id')->count();
         return [
             Stat::make('Total Providers', Provider::count())
                 ->description('Registered service providers')
@@ -37,12 +38,12 @@ class ProviderStats extends BaseWidget
                 ->descriptionIcon('heroicon-o-user-group')
                 ->color('info'),
 
-            Stat::make('Categories', Category::count())
+            Stat::make('Categories', $rootCategoryCount)
                 ->description('Main service categories')
                 ->color('gray'),
 
-            Stat::make('Subcategories', Subcategory::count())
-                ->description('Available service types')
+            Stat::make('Service Types', $childCategoryCount)
+                ->description('Leaf-level categories')
                 ->color('gray'),
 
             Stat::make('Total Reviews', $reviewCount)

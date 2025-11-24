@@ -50,6 +50,12 @@ class CategoryResource extends Resource
                                     ->required()
                                     ->unique(ignoreRecord: true) 
                                     ->helperText('Used in URLs or API routes'),
+                                Select::make('parent_id')
+                                    ->label('Parent Category')
+                                    ->relationship('parent', 'name_en', fn ($query) => $query->whereNull('parent_id'))
+                                    ->searchable()
+                                    ->preload()
+                                    ->helperText('Leave empty for a top-level category'),
                             ]),
                     ]),
 
@@ -112,6 +118,12 @@ class CategoryResource extends Resource
                     ->label('Name (AR)')
                     ->sortable()
                     ->searchable(),
+                TextColumn::make('parent.name_en')
+                    ->label('Parent')
+                    ->sortable()
+                    ->badge()
+                    ->toggleable()
+                    ->color('gray'),
                 IconColumn::make('is_active')
                     ->label('Visible')
                     ->boolean(),

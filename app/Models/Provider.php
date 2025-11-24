@@ -13,11 +13,12 @@ class Provider extends Model
 
     protected $fillable = [
         'business_name',
-        'subcategory_id',
+        'category_id',
         'user_id',
         'is_active',
         'is_featured',
         'is_verified',
+        'approval_status',
     ];
 
 
@@ -49,9 +50,9 @@ class Provider extends Model
         return $this->hasOne(ProviderStat::class);
     }
 
-    public function subcategory()
+    public function category()
     {
-        return $this->belongsTo(Subcategory::class);
+        return $this->belongsTo(Category::class);
     }
 
     public function user()

@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('business_name')->nullable();
 
-            $table->foreignId('subcategory_id')->constrained()->onDelete('cascade');
+            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->foreignId('user_id')->unique()->constrained()->onDelete('cascade');
 
             $table->boolean('is_active')->default(false);

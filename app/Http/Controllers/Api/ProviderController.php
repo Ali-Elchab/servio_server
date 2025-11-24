@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\ResponseMessages;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Provider\StoreProviderRequest;
 use App\Http\Requests\Provider\UpdateProviderRequest;
-use App\Http\Requests\StoreProviderRequest;
 use App\Http\Resources\ProviderResource;
 use App\Models\Provider;
 use App\Models\ProviderMedia;
@@ -22,7 +22,8 @@ class ProviderController extends Controller
         $query = Provider::query()->where('is_active', true)->where('approval_status', 'approved');
 
         // Sanitize inputs
-        $subcategoryId = trim($request->get('subcategory_id'));
+        $categoryId = trim($request->get('category_id'));
+        $parentCategoryId = trim($request->get('parent_category_id'));
         $search = trim($request->get('search'));
         $location = trim($request->get('location'));
         $perPage = min((int) $request->get('per_page', 10), 50);
@@ -30,9 +31,11 @@ class ProviderController extends Controller
         $longitude = $request->get('longitude');
         $radius = $request->get('radius', 20);
 
-        // Filter by subcategory
-        if ($subcategoryId) {
-            $query->where('subcategory_id', $subcategoryId);
+        // Filter by category (leaf)
+        if ($categoryId) {
+            $query->where('category_id', $categoryId);
+        } elseif ($parentCategoryId) {
+            $query->whereHas('category', fn ($q) => $q->where('parent_id', $parentCategoryId));
         }
 
         // Filter by location
@@ -67,7 +70,7 @@ class ProviderController extends Controller
         // Default sorting (newest first)
         $query->orderByDesc('created_at');
         
-        $providers =  $query->with(['subcategory', 'profile', 'media', 'user'])->paginate($perPage);
+        $providers =  $query->with(['category.parent', 'profile', 'media', 'user'])->paginate($perPage);
 
         return $this->success(
             ProviderResource::collection($providers),
@@ -80,6 +83,7 @@ class ProviderController extends Controller
     public function show(Provider $provider)
     {
         abort_if(!$provider->is_active || $provider->approval_status !== 'approved', 404);
+        $provider->loadMissing(['category.parent', 'profile', 'media', 'user']);
         return $this->success(
             new ProviderResource($provider),
             ResponseMessages::FETCH_SUCCESS(),
@@ -95,7 +99,7 @@ class ProviderController extends Controller
         // Save provider
         $provider = Provider::create([
             'user_id'        => $user_id,
-            'subcategory_id' => $data['subcategory_id'],
+            'category_id' => $data['category_id'],
             'business_name'        => $data['business_name'],
             'is_active'      => false,
             'is_verified'    => false,
@@ -157,8 +161,8 @@ class ProviderController extends Controller
 
         // --- Update provider ---
         $provider->update(array_filter([
-            'subcategory_id' => $data['subcategory_id'] ?? $provider->subcategory_id,
-            'business_name'           => $data['business_name'] ?? $provider->name,
+            'category_id' => $data['category_id'] ?? $provider->category_id,
+            'business_name'           => $data['business_name'] ?? $provider->business_name,
             'approval_status' => 'pending',
 
         ]));
@@ -208,6 +212,8 @@ class ProviderController extends Controller
         if (!$provider) {
             return $this->error(ResponseMessages::PROVIDER_PROFILE_MISSING(), 404);
         }
+
+        $provider->loadMissing(['category.parent', 'profile', 'media', 'user']);
 
         return $this->success(new ProviderResource($provider), ResponseMessages::PROVIDER_PROFILE_FETCHED());
     }

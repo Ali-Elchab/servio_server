@@ -14,6 +14,9 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
 
+            // Nesting support
+            $table->foreignId('parent_id')->nullable()->constrained('categories')->cascadeOnDelete();
+
             // Translatable fields
             $table->string('name_en');
             $table->string('name_ar');
@@ -21,9 +24,6 @@ return new class extends Migration
 
             // Media
             $table->string('image')->nullable();
-
-            // Nesting support
-            // $table->foreignId('parent_id')->nullable()->constrained('categories')->onDelete('cascade');
 
             // Flags
             $table->unsignedInteger('priority')->default(0)->index();

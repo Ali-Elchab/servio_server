@@ -17,7 +17,7 @@ class FavoriteController extends Controller
     public function index(Request $request)
     {
         $user = $request->user();
-        $favorites = $user->favorites()->with('subcategory')->get();
+        $favorites = $user->favorites()->with(['category.parent', 'profile', 'media', 'user'])->get();
 
         return $this->success(
             ProviderResource::collection($favorites),
